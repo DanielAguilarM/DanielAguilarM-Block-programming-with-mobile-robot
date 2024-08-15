@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Serial API Example</title>
+</head>
+<body>
+  <h1>Web Serial API Example</h1>
+  <button id="connectButton">Connect</button>
+  <br>
+  <input type="text" id="serialInput" placeholder="Enter text to send">
+  <button id="sendButton">Send</button>
+  <pre id="output"></pre>
+
+  <script>
+    let port;
+    let writer;
+    let reader;
+
+    document.getElementById('connectButton').addEventListener('click', async () => {
+      try {
+        // Solicitamos el puerto serial
+        port = await navigator.serial.requestPort();
+        // Abrimos el puerto con un baud rate de 115200
+        await port.open({ baudRate: 115200 });
+
+        writer = port.writable.getWriter();
+        reader = port.readable.getReader();
+
+        // Leemos el puerto en un loop
+        readLoop();
+      } catch (error) {
+        console.error('Error opening serial port:', error);
+      }
+    });
+
+    document.getElementById('sendButton').addEventListener('click', async () => {
+      const input = document.getElementById('serialInput').value;
+      const encoder = new TextEncoder();
+      const data = encoder.encode(input + '\n');
+      await writer.write(data);
+    });
+
+    async function readLoop() {
+      const decoder = new TextDecoder();
+      while (true) {
+        try {
+          const { value, done } = await reader.read();
+          if (done) {
+            // Allow the serial port to be closed later.
+            reader.releaseLock();
+            break;
+          }
+          document.getElementById('output').textContent += decoder.decode(value);
+        } catch (error) {
+          console.error('Error reading from serial port:', error);
+          break;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

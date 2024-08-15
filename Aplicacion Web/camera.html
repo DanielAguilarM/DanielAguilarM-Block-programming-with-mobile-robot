@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Camera View</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>IMT-353</strong> Camera View</a>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+    <section>
+        <header class="main">
+            <h1>Transmision en vivo</h1>
+        </header>
+
+        <span class="image main"><img src="http://192.168.0.18:5000/video_feed" width="640" height="480" alt="Transmisión en Vivo">
+		</span>
+
+        <p>Visualizacion en tiempo real del robot movil</p>
+
+        </section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script>
+				// Load sidebar content
+				$(function(){
+					$("#sidebar").load("sidebar.html");
+				});
+			</script>
+	</body>
+</html>
